@@ -1,4 +1,4 @@
-import { Address, BigInt, Bytes, Wrapped } from '..'
+import {Address, BigInt, Bytes, log, Wrapped} from '..'
 
 /** Host Ethereum interface */
 export declare namespace ethereum {
@@ -452,6 +452,7 @@ export namespace ethereum {
       params: Array<Value>,
     ): CallResult<Array<Value>> {
       let call = new SmartContractCall(this._name, this._address, name, signature, params)
+      log.debug("SmartContractCall:{}-{}-{}-{}-{}", [this._name, this._address.toHexString(), name, signature, params.toString()])
       let result = ethereum.call(call)
       if (result == null) {
         return new CallResult()
